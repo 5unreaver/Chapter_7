@@ -1,9 +1,45 @@
 // Простая иерархия классов
+// Использование методов для установки и получения
+// закрытых членов
 
-/// Класс, описывающий двумерные объекты
+// Класс, описывающий двумерные объекты
 class TwoDShape {
-    double width;
-    double height;
+    // закрытые члены суперкласса
+    private double width;
+    private double height;
+
+    // Конструктор по умолчанию
+    TwoDShape() {
+        width = height = 0.0;
+    }
+
+    // Параметризированный конструктор
+    TwoDShape(double w, double h) {
+        width = w;
+        height = h;
+    }
+
+    // Конструктор с одинаковыми значениями width & height
+    TwoDShape(double x) {
+        width = height = x;
+    }
+
+    // Методы доступа к закрытым членам суперкласса
+    double getWidth() {
+        return width;
+    }
+
+    double getHeigth() {
+        return height;
+    }
+
+    void setWidth(double w) {
+        width = w;
+    }
+
+    void setHeigth(double h) {
+        height = h;
+    }
 
     void showDim() {
         System.out.println("Ширина и высота - " +
@@ -16,8 +52,30 @@ class TwoDShape {
 class Triangle extends TwoDShape {
     String style;
 
+    // Конструктор по умолчанию
+    Triangle() {
+        super();
+        style = "none";
+    }
+
+    // Конструктор
+    Triangle(String s, double w, double h) {
+//        setWidth(w);
+//        setHeigth(h); // стр. 254
+        super(w, h);
+
+        style = s;
+    }
+
+    // Конструктор с одним аргументом
+    Triangle(double x) {
+        super(x);
+
+        style = "закрашенный";
+    }
+
     double area() {
-        return width * height / 2;
+        return getWidth() * getHeigth() / 2;
     }
 
     void showStyle() {
@@ -27,29 +85,32 @@ class Triangle extends TwoDShape {
 
 // Подкласс для представления прямоугольников;
 // Производный от класса TwoDShape
-class Rectangle extends TwoDShape {
-    boolean isSquare() {
-        if (width == height) return true;
-        return false;
-    }
-
-    double area() {
-        return width * height;
-    }
-}
+//class Rectangle extends TwoDShape {
+//    boolean isSquare() {
+//        if (getWidth() == getHeigth()) return true;
+//        return false;
+//    }
+//
+//    double area() {
+//        return getWidth() * getHeigth();
+//    }
+//}
 
 class Shapes {
     public static void main(String args[]) {
         Triangle t1 = new Triangle();
-        Triangle t2 = new Triangle();
+        Triangle t2 = new Triangle(4.0);
+        Triangle t3 = new Triangle("контурный", 8.0, 12.0);
 
-        t1.width = 4.0;
-        t1.height = 4.0;
-        t1.style = "закрашенный";
+//        t1.setWidth(4.0);
+//        t1.setHeigth(4.0);
+//        t1.style = "закрашенный";
+//
+//        t2.setWidth(8.0);
+//        t2.setHeigth(12.0);
+//        t2.style = "контурный";
 
-        t2.width = 8.0;
-        t2.height = 12.0;
-        t2.style = "контурный";
+        t1 = t3;
 
         System.out.println("Информация о t1: ");
         t1.showStyle();
@@ -63,13 +124,20 @@ class Shapes {
         t2.showDim();
         System.out.println("Площадь: " + t2.area());
 
-        Rectangle r1 = new Rectangle();
-        r1.width = 4.0;
-        r1.height = 4.0;
-
         System.out.println();
 
-        System.out.println("Является ли r1 квадратом? Ответ: " + r1.isSquare());
-        System.out.println("Площадь: " + r1.area());
+        System.out.println("Информация о t3: ");
+        t3.showStyle();
+        t3.showDim();
+        System.out.println("Площадь: " + t3.area());
+
+//        Rectangle r1 = new Rectangle();
+//        r1.setWidth(4.0);
+//        r1.setHeigth(4.0);
+//
+//        System.out.println();
+//
+//        System.out.println("Является ли r1 квадратом? Ответ: " + r1.isSquare());
+//        System.out.println("Площадь: " + r1.area());
     }
 }
