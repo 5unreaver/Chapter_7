@@ -19,7 +19,7 @@ class TwoDShape {
         height = h;
     }
 
-    // Конструктор с одинаковыми значениями width & height
+    // Конструктор (для объекта) с одинаковыми значениями width & height
     TwoDShape(double x) {
         width = height = x;
     }
@@ -83,6 +83,26 @@ class Triangle extends TwoDShape {
     }
 }
 
+// Расширение класса Triangle
+class ColorTriangle extends Triangle {
+    private String color;
+
+    ColorTriangle(String c, String s,
+                  double w, double h) {
+        super(s, w, h);
+
+        color = c;
+    }
+
+    String getColor() {
+        return color;
+    }
+
+    void showColor() {
+        System.out.println("Цвет - " + color);
+    }
+}
+
 // Подкласс для представления прямоугольников;
 // Производный от класса TwoDShape
 //class Rectangle extends TwoDShape {
@@ -101,6 +121,9 @@ class Shapes {
         Triangle t1 = new Triangle();
         Triangle t2 = new Triangle(4.0);
         Triangle t3 = new Triangle("контурный", 8.0, 12.0);
+
+        ColorTriangle t4 =
+                new ColorTriangle("Синий", "контурный", 8.0, 12.0);
 
 //        t1.setWidth(4.0);
 //        t1.setHeigth(4.0);
@@ -130,6 +153,14 @@ class Shapes {
         t3.showStyle();
         t3.showDim();
         System.out.println("Площадь: " + t3.area());
+
+        System.out.println();
+
+        System.out.println("Информация о t4: ");
+        t4.showStyle();
+        t4.showDim();
+        t4.showColor(); // может вызвать как собственные методы, таки методы суперкласса.
+        System.out.println("Площадь: " + t4.area());
 
 //        Rectangle r1 = new Rectangle();
 //        r1.setWidth(4.0);

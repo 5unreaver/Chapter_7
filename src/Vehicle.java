@@ -1,18 +1,15 @@
 class TruckDemo {
     public static void main(String[] args) {
-//        Vehicle minivan = new Vehicle(7, 16, 21);
-//        Vehicle musclecar = new Vehicle(2, 14, 12);
-//
-//        int range, range2;
-//
-//        // Рассчитать дальность поездки при полном баке.
-//        range = minivan.mpg * minivan.fuelcap;
-//        System.out.println("Фургон может провезти " + minivan.passengers
-//                + " человек на " + range + " миль.");
-//
-//        range2 = musclecar.mpg * musclecar.fuelcap;
-//        System.out.println("Маслкар может провезти " + musclecar.passengers
-//                + " человек на " + range2 + " миль.");
+        Vehicle minivan = new Vehicle(7, 16, 21);
+        Vehicle musclecar = new Vehicle(2, 14, 12);
+
+        // Рассчитать дальность поездки при полном баке.
+        System.out.println("Фургон может провезти " + minivan.getPassengers()
+                + " человек на " + minivan.range() + " миль ценою "
+                + minivan.fuelneeded(minivan.range()) + " галлонов топлива.");
+        System.out.println("Маслкар может провезти " + musclecar.getPassengers()
+                + " человек на " + musclecar.range() + " миль ценою "
+                + musclecar.fuelneeded(musclecar.range()) + " галлонов топлива.\n");
 
         // Создать ряд новых объектов типа Truck
         Truck semi = new Truck(2, 200, 7, 44000);
@@ -102,5 +99,16 @@ class Truck extends Vehicle {
 
     void putCargo(int c) {
         cargocap = c;
+    }
+}
+
+class OffRoad extends Vehicle {
+    private  int groundClearance; // дорожный просвет в дюймах
+
+    OffRoad(int p, int f, int m, int g) {
+        /* Инициализация членов класса Vehicle
+        с использованием конструктора этого класса. */
+        super(p, f, m);
+        groundClearance = g;
     }
 }
